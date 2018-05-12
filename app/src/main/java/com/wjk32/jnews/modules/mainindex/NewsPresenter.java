@@ -117,5 +117,11 @@ public class NewsPresenter implements NewsContract.Presenter {
         loadNews();
     }
 
+    public void undispose(){
+        if(disposable!=null&&!disposable.isDisposed()){
+            disposable.dispose();
+        }
+    }
+
 
 }

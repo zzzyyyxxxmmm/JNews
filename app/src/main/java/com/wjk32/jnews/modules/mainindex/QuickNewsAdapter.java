@@ -1,8 +1,10 @@
 package com.wjk32.jnews.modules.mainindex;
 
+import android.content.Context;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -13,8 +15,10 @@ import com.wjk32.jnews.entity.Artical;
 import java.util.List;
 
 public class QuickNewsAdapter extends BaseQuickAdapter<Artical,BaseViewHolder> {
-    public QuickNewsAdapter(int layoutResId,@Nullable List<Artical> data) {
+    Context context;
+    public QuickNewsAdapter(int layoutResId,@Nullable List<Artical> data,Context context) {
         super(layoutResId,data);
+        this.context=context;
     }
 
     @Override
@@ -22,4 +26,6 @@ public class QuickNewsAdapter extends BaseQuickAdapter<Artical,BaseViewHolder> {
         helper.setText(R.id.tab_bar_01_item_textview,item.getTitle());
         Picasso.with(mContext).load(item.getUrlToImage()).into((ImageView) helper.getView(R.id.tab_bar_01_item_imageview));
     }
+
+
 }

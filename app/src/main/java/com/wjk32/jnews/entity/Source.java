@@ -1,10 +1,12 @@
 package com.wjk32.jnews.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by wjk32 on 12/29/2017.
  */
 
-public class Source{
+public class Source implements Serializable{
     private String name;
     private String id;
 

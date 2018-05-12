@@ -18,5 +18,6 @@ public class NewsContract {
     interface Presenter extends BasePresenter{
         void loadNews();
         void changeNewsheader(boolean stop,int currentpage);
+        void undispose();
     }
 }

@@ -2,7 +2,9 @@ package com.wjk32.jnews.modules.mainindex;
 
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,13 +15,17 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.LoopRecyclerview.LoopRecyclerViewPager;
 import com.chad.library.adapter.base.LoopRecyclerview.RecyclerViewPager;
 import com.wjk32.jnews.constants.NewsC;
 import com.wjk32.jnews.R;
 import com.wjk32.jnews.entity.Artical;
 import com.wjk32.jnews.entity.News;
+import com.wjk32.jnews.modules.Constants;
+import com.wjk32.jnews.modules.mainindex.NewsDetail.NewsDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +60,9 @@ public class NewsFragment extends Fragment implements NewsContract.View{
     LoopRecyclerViewPager vpTop;
 
     Boolean isAutoPlay;
-
+    LinearLayoutManager linearLayoutManager;
+    LinearLayoutManager mLayoutManager;
+    Parcelable parcelable;
     private NewsContract.Presenter mPresenter;
 
     public NewsFragment() {
@@ -65,6 +73,11 @@ public class NewsFragment extends Fragment implements NewsContract.View{
         return new NewsFragment();
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        System.out.println("OnAttach");
+    }
 
     @Override
     public void onResume() {
@@ -82,7 +95,12 @@ public class NewsFragment extends Fragment implements NewsContract.View{
 
         View view1 = LayoutInflater.from(getContext()).inflate(R.layout.tab_bar_01_newsheader, (ViewGroup) recyclerView.getParent(), false);
         vpTop = (LoopRecyclerViewPager) view1.findViewById(R.id.vp_top);
-        vpTop.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+
+
+        if(linearLayoutManager==null){
+            linearLayoutManager=new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
+        }
+        vpTop.setLayoutManager(linearLayoutManager);
 
 
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -97,15 +115,41 @@ public class NewsFragment extends Fragment implements NewsContract.View{
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public void showNews(List<Artical> articalList) {
-        QuickNewsAdapter  quickNewsAdapter=new QuickNewsAdapter(R.layout.tab_bar_01_item,articalList);
+        QuickNewsAdapter  quickNewsAdapter=new QuickNewsAdapter(R.layout.tab_bar_01_item,articalList,getContext());
+        quickNewsAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                NewsDetailActivity.start(getContext(),view.findViewById(R.id.tab_bar_01_item_imageview),articalList.get(position));
+
+            }
+        });
         if(vpTop.getParent()!=null)
             ((ViewGroup)vpTop.getParent()).removeView(vpTop); // <- fix
         vpTop.setAdapter(new NewsHeaderAdapter(R.layout.tab_bar_01_newsheader_item,articalList));
         quickNewsAdapter.addHeaderView(vpTop);
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+        if(mLayoutManager==null)
+            mLayoutManager = new LinearLayoutManager(getContext());
+        if(parcelable!=null)
+            mLayoutManager.onRestoreInstanceState(parcelable);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(quickNewsAdapter);
+        recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
+        });
         swipeContainer.setRefreshing(false);
         mPresenter.changeNewsheader(isAutoPlay,vpTop.getActualCurrentPosition());
         vpTop.setOnTouchListener(new View.OnTouchListener() {
@@ -129,7 +173,6 @@ public class NewsFragment extends Fragment implements NewsContract.View{
 
     @Override
     public void showHeader(int position) {
-        System.out.println(position);
         vpTop.smoothScrollToPosition(position);
     }
 
@@ -137,5 +180,17 @@ public class NewsFragment extends Fragment implements NewsContract.View{
     public void setPresenter(NewsContract.Presenter presenter) {
         mPresenter = presenter;
 
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        parcelable=mLayoutManager.onSaveInstanceState();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mPresenter.undispose();
     }
 }

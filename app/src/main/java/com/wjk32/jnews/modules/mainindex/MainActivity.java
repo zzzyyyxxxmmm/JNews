@@ -27,6 +27,7 @@ public class MainActivity extends NaviActivity{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        System.out.println("OnCreate");
         ButterKnife.bind(this);
         viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
@@ -57,4 +58,9 @@ public class MainActivity extends NaviActivity{
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        System.out.println("onDestroy");
+    }
 }

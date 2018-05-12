@@ -1,12 +1,13 @@
 package com.wjk32.jnews.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by wjk32 on 12/15/2017.
  */
 
-public class News {
+public class News implements Serializable{
 
     private String status;
     private int totalResults;

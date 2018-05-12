@@ -24,6 +24,17 @@
         <activity android:name=".modules.mainindex.MainActivity"
             android:theme="@style/AppTheme"
             ></activity>
+
+
+        <activity android:name=".modules.mainindex.NewsDetail.NewsDetailActivity"
+            android:parentActivityName=".modules.mainindex.MainActivity" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".modules.mainindex.MainActivity" />
+
+        </activity>
     </application>
 
 </manifest>
