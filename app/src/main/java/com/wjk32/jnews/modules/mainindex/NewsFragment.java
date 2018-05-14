@@ -4,6 +4,8 @@ package com.wjk32.jnews.modules.mainindex;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,6 +22,7 @@ import android.widget.Toast;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.LoopRecyclerview.LoopRecyclerViewPager;
 import com.chad.library.adapter.base.LoopRecyclerview.RecyclerViewPager;
+import com.pnikosis.materialishprogress.ProgressWheel;
 import com.wjk32.jnews.constants.NewsC;
 import com.wjk32.jnews.R;
 import com.wjk32.jnews.entity.Artical;
@@ -52,7 +55,7 @@ public class NewsFragment extends Fragment implements NewsContract.View{
     private List<Integer> imageIdList;
     private ArrayList<String> imageinfo=new ArrayList<String>();
     @BindView(R.id.tab_bar_01_recyclerview)
-     RecyclerView recyclerView;
+    RecyclerView recyclerView;
 
     @BindView(R.id.swipeContainer)
     SwipeRefreshLayout swipeContainer;
@@ -79,11 +82,19 @@ public class NewsFragment extends Fragment implements NewsContract.View{
         System.out.println("OnAttach");
     }
 
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        isAutoPlay=true;
+        mPresenter.start(false);
+    }
+
+
     @Override
     public void onResume() {
         super.onResume();
-        isAutoPlay=true;
-        mPresenter.start();
+
     }
 
     @Nullable
@@ -106,7 +117,7 @@ public class NewsFragment extends Fragment implements NewsContract.View{
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mPresenter.loadNews();
+                mPresenter.start(true);
         }
         });
         return view;
@@ -114,7 +125,7 @@ public class NewsFragment extends Fragment implements NewsContract.View{
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
-    public void showNews(List<Artical> articalList) {
+    public void showNews(List<Artical> articalList,boolean refresh) {
         QuickNewsAdapter  quickNewsAdapter=new QuickNewsAdapter(R.layout.tab_bar_01_item,articalList,getContext());
         quickNewsAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
@@ -129,7 +140,7 @@ public class NewsFragment extends Fragment implements NewsContract.View{
         quickNewsAdapter.addHeaderView(vpTop);
         if(mLayoutManager==null)
             mLayoutManager = new LinearLayoutManager(getContext());
-        if(parcelable!=null)
+        if(parcelable!=null&&!refresh)
             mLayoutManager.onRestoreInstanceState(parcelable);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setHasFixedSize(true);
@@ -151,7 +162,6 @@ public class NewsFragment extends Fragment implements NewsContract.View{
             }
         });
         swipeContainer.setRefreshing(false);
-        mPresenter.changeNewsheader(isAutoPlay,vpTop.getActualCurrentPosition());
         vpTop.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

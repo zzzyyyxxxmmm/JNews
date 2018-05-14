@@ -10,7 +10,7 @@ import android.support.v4.view.ViewPager;
 import com.wjk32.jnews.constants.C;
 import com.wjk32.jnews.R;
 import com.wjk32.jnews.base.NaviActivity;
-import com.wjk32.jnews.modules.second.TabsFragment02;
+import com.wjk32.jnews.modules.second.ImageFragment;
 import com.wjk32.jnews.modules.third.TabsFragment03;
 
 import butterknife.BindView;
@@ -38,7 +38,7 @@ public class MainActivity extends NaviActivity{
                     return newsFragment;
                 }
                 else if(position==1){
-                    return new TabsFragment02();
+                    return new ImageFragment();
                 }
                 else return new TabsFragment03();
             }

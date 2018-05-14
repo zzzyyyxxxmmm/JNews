@@ -46,7 +46,7 @@ public class NewsPresenter implements NewsContract.Presenter {
 
 
     @Override
-    public void loadNews() {
+    public void loadNews(boolean refresh) {
         okhttp3.OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.connectTimeout(5, TimeUnit.SECONDS);
 
@@ -81,7 +81,7 @@ public class NewsPresenter implements NewsContract.Presenter {
                         articalList=newsList.getArticlest();
                         articalList.addAll(newsList.getArticlest());
                         mHeaderNums=articalList.size();
-                        mNewsView.showNews(articalList);
+                        mNewsView.showNews(articalList,refresh);
                     }
                 });
     }
@@ -113,8 +113,13 @@ public class NewsPresenter implements NewsContract.Presenter {
     }
 
     @Override
-    public void start() {
-        loadNews();
+    public void start(boolean refresh) {
+        if(disposable!=null&&!disposable.isDisposed()){
+            disposable.dispose();
+        }
+        loadNews(refresh);
+
+        changeNewsheader(true,0);
     }
 
     public void undispose(){

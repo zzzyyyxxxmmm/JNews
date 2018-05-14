@@ -43,4 +43,7 @@ dependencies {
 
 
     compile 'net.opacapp:multiline-collapsingtoolbar:27.1.1'
+
+    //loading
+    compile 'com.pnikosis:materialish-progress:1.7'
 }

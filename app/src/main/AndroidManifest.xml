@@ -35,6 +35,8 @@
                 android:value=".modules.mainindex.MainActivity" />
 
         </activity>
+
+        <activity android:name=".modules.second.ImageDetailActivity"></activity>
     </application>
 
 </manifest>

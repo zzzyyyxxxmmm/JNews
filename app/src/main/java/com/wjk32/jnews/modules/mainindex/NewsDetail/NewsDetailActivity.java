@@ -15,6 +15,10 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -45,7 +49,7 @@ public class NewsDetailActivity extends BaseActivity implements NewsDetailContra
     @BindView(R.id.app_bar)
     AppBarLayout appBar;
     @BindView(R.id.wv_detail_content)
-    TextView wvDetailContent;
+    WebView wvDetailContent;
     @BindView(R.id.nsv_scroller)
     NestedScrollView nsvScroller;
     @BindView(R.id.fab)
@@ -72,6 +76,8 @@ public class NewsDetailActivity extends BaseActivity implements NewsDetailContra
         setSupportActionBar(toolbar);
 
 
+
+
         // Get a support ActionBar corresponding to this toolbar
         ActionBar ab = getSupportActionBar();
 
@@ -82,10 +88,18 @@ public class NewsDetailActivity extends BaseActivity implements NewsDetailContra
         artical=(Artical) getIntent().getSerializableExtra(Constants.TONEWSDETAILS);
         collapsingToolbar.setTitle(artical.getTitle());
         Picasso.with(getBaseContext()).load(artical.getUrlToImage()).into(detailBarImage);
-
-        System.out.println(artical.getDescription());
-        wvDetailContent.setText(artical.getDescription());
-
+        WebSettings settings = wvDetailContent.getSettings();
+        settings.setBlockNetworkImage(true);
+        wvDetailContent.loadUrl(artical.getUrl());
+        wvDetailContent.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                // TODO Auto-generated method stub
+                //返回值是true的时候控制去WebView打开，为false调用系统浏览器或第三方浏览器
+                view.loadUrl(url);
+                return true;
+            }
+        });
 
     }
 
