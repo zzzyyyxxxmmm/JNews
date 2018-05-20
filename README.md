@@ -1,4 +1,4 @@
-Android Shopping Application
+JNews
 ==================
 Jikang Wang
 # OverView
