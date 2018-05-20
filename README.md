@@ -14,7 +14,7 @@ Jikang Wang
 
 实现cardview+recyclerview
 
-<img src="https://github.com/zzzyyyxxxmmm/JNews/blob/master/picture/1.png" width="20%" height="20%"><img src="https://github.com/zzzyyyxxxmmm/JNews/blob/master/picture/2.png" width="60%" height="60%">
+<img src="https://github.com/zzzyyyxxxmmm/JNews/blob/master/picture/1.png" width="20%" height="20%"><img src="https://github.com/zzzyyyxxxmmm/JNews/blob/master/picture/2.png" width="20%" height="20%">
 
 2  实现了viewpager轮播，搞了一大堆库，下一个目标就是把这些库弄懂，顺便加上自动循环viewpager，原理直接开个线程用handler搞就行了，另外写个presenter，fragment里东西太多了，得搞成MVP
 
@@ -34,14 +34,20 @@ https://github.com/googlesamples/android-architecture
 4. 昨天一直遇到一个坑，那就是从recyclerview详情页返回后（注意是按actionbar上的回退按钮），之前的activity居然被kill了，查看内存，也没有被杀的迹象，百思不得其解，后来查到
 
 <img src="https://github.com/zzzyyyxxxmmm/JNews/blob/master/picture/3.png" width="60%" height="60%">
+
 目前有两种解决方式：
+
 <img src="https://github.com/zzzyyyxxxmmm/JNews/blob/master/picture/4.png" width="60%" height="60%">
+
 还有种就是改singleTop
 
 但就算这样做了之后，之前的activity没有被re-created，但是没有了动画效果，因为我startactivity的时候是有动画效果的，查看如下信息
+
 <img src="https://github.com/zzzyyyxxxmmm/JNews/blob/master/picture/5.png" width="60%" height="60%">
 于是改成这样：
+
 <img src="https://github.com/zzzyyyxxxmmm/JNews/blob/master/picture/6.png" width="60%" height="60%">
+
 OK了，下一步要做的就是，回退后恢复到原来的位置
 parcelable=mLayoutManager.onSaveInstanceState();
 
@@ -53,6 +59,7 @@ if(parcelable!=null)
 另外解决了一个小bug，就是从详情页跳回来，viewpager轮播的会特别快，显然是之前发送轮播时间的rxjava没有被解绑，于是在fragment里onpause那解绑了一下，一下恢复了，我真棒棒
 
 接下来是美化newsdetail页，目前的状态, 用了webview，总算有点样子，感觉可以用了
+
 <img src="https://github.com/zzzyyyxxxmmm/JNews/blob/master/picture/7.png" width="20%" height="20%"><img src="https://github.com/zzzyyyxxxmmm/JNews/blob/master/picture/8.png" width="20%" height="20%">
 
 5. 用了StaggerGridLayout显示图片，下一步是点击图片放大，并且加上图片的一些参数（点击，评论什么的）
