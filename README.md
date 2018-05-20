@@ -14,7 +14,7 @@ Jikang Wang
 
 实现cardview+recyclerview
 
-<img src="https://github.com/zzzyyyxxxmmm/JNews/blob/master/picture/1.png" width="60%" height="60%"> <img src="https://github.com/zzzyyyxxxmmm/JNews/blob/master/picture/2.png" width="60%" height="60%">
+<img src="https://github.com/zzzyyyxxxmmm/JNews/blob/master/picture/1.png" width="20%" height="20%"><img src="https://github.com/zzzyyyxxxmmm/JNews/blob/master/picture/2.png" width="60%" height="60%">
 
 2  实现了viewpager轮播，搞了一大堆库，下一个目标就是把这些库弄懂，顺便加上自动循环viewpager，原理直接开个线程用handler搞就行了，另外写个presenter，fragment里东西太多了，得搞成MVP
 
@@ -53,10 +53,10 @@ if(parcelable!=null)
 另外解决了一个小bug，就是从详情页跳回来，viewpager轮播的会特别快，显然是之前发送轮播时间的rxjava没有被解绑，于是在fragment里onpause那解绑了一下，一下恢复了，我真棒棒
 
 接下来是美化newsdetail页，目前的状态, 用了webview，总算有点样子，感觉可以用了
-<img src="https://github.com/zzzyyyxxxmmm/JNews/blob/master/picture/7.png" width="60%" height="60%"> <img src="https://github.com/zzzyyyxxxmmm/JNews/blob/master/picture/8.png" width="60%" height="60%">
+<img src="https://github.com/zzzyyyxxxmmm/JNews/blob/master/picture/7.png" width="20%" height="20%"><img src="https://github.com/zzzyyyxxxmmm/JNews/blob/master/picture/8.png" width="20%" height="20%">
 
 5. 用了StaggerGridLayout显示图片，下一步是点击图片放大，并且加上图片的一些参数（点击，评论什么的）
-<img src="https://github.com/zzzyyyxxxmmm/JNews/blob/master/picture/9.png" width="60%" height="60%">
+<img src="https://github.com/zzzyyyxxxmmm/JNews/blob/master/picture/9.png" width="20%" height="20%">
 图片放大做了很久，一开始是参考https://developer.android.com/training/animation/zoom 上的方法，但这个方法局限性很大，额外加一些操作很难，于是干脆重新开了一个activity，还是用之前的ActivityOptionsCompat.makeSceneTransitionAnimation 来做图片放大转换，与是干脆做了个预加载模糊图片，点开后加载高清图片的功能，一开始是用Picasso加载缩略图，成功后通过回调加载高清图，但这样做的bug是之前加载的缩略图会消失，也就是根本不会产生动画效果，只会加载高清图，解决方案：https://github.com/square/picasso/issues/257
 
 稳
