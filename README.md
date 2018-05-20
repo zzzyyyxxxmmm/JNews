@@ -7,7 +7,7 @@ Jikang Wang
 滑动返回，貌似是要改activity，后期再改
 
 
-#log
+# log
 1 在base里创建了baseactivity和naviactivity，naviactivity实现了navigation的效果，这样让MainActivity显得更清爽一点
 实现tabview+viewpager
 这里有个问题，viewpager.setOffscreenPagLimit(1)会默认多加载前一个和后一个的page，而且不能设置为0，因此不能每次只加载一个页面，这样就会导致多占内存，fragment提供了一个setUserVisbleHint，可以判断是否显示
