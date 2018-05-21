@@ -27,6 +27,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.wjk32.jnews.R;
 import com.wjk32.jnews.entity.Artical;
 import com.wjk32.jnews.entity.ImageEntity;
+import com.wjk32.jnews.modules.Constants;
 import com.wjk32.jnews.modules.mainindex.NewsContract;
 import com.wjk32.jnews.modules.mainindex.NewsDetail.NewsDetailActivity;
 
@@ -93,7 +94,12 @@ public class ImageFragment extends Fragment implements ImageContract.View{
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 ImageEntity.HitsBean hitsBean=( ImageEntity.HitsBean)adapter.getItem(position);
-                ImageDetailActivity.start(getContext(),view.findViewById(R.id.tab_bar_02_item_imageview),hitsBean);
+                //ImageDetailActivity.start(getContext(),view.findViewById(R.id.tab_bar_02_item_imageview),hitsBean);
+
+                Intent starter = new Intent(getActivity(), ImageDetailActivity.class);
+                starter.putExtra(Constants.TONEWSDETAILS, hitsBean);
+                startActivity(starter);
+                getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
                 //ImageView imageView= (ImageView)view.findViewById(R.id.tab_bar_02_item_imageview);
             }

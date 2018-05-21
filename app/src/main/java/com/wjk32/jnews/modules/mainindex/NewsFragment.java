@@ -195,7 +195,7 @@ public class NewsFragment extends Fragment implements NewsContract.View{
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        parcelable=mLayoutManager.onSaveInstanceState();
+        if(mLayoutManager!=null)    parcelable=mLayoutManager.onSaveInstanceState();
     }
 
     @Override

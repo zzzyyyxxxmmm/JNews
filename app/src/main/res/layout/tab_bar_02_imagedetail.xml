@@ -3,9 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/container"
+    android:background="@color/black_bg"
     >
 
-    <ImageView
+    <com.wjk32.library.view.PieImageView
         android:id="@+id/expanded_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
