@@ -71,3 +71,17 @@ if(parcelable!=null)
 这个imageview应该改成viewpager可以左右滑动，明天加上显示点赞数，放大，长按保存的功能
 
 另外Tab3的功能应该是做一个视频相关的
+
+6. 回家了，继续做
+pinch to zoom: https://medium.com/quick-code/pinch-to-zoom-with-multi-touch-gestures-in-android-d6392e4bf52d
+
+图片加载时显示progress，picasso本身没有提供进度的回调，因此需要自己写个类，okhttpclient处理response的时候会有回调
+Picasso的总体流程：
+总的来说Picasso的流程很简单，当Picasso通过load方法获取图片的时候，需要经过如下步骤才能完成显示图片的流程：
+1）将请求封装为Request对象，然后将Request对象进一步封装为Action（ImageAction)对象。
+2）将Action(ImageAction)对象交给Dispather进行分发
+3）最终将action交给BitmapHunter这个Runnable作为在线程池中线程的工作的单元（具体的是讲action持有的当前Reqeuest对象）
+4）由RequestHandler来处理当前request,调用其load方法将加载完成后的图片交给PicassoDrawable显示图片。
+代码流程如下：Picasso->load->创建request->创建action->Dispatcher分发action->RequestHandler的load方法处理具体的请求->PicassoDrawable显示图片。
+
+另外写了PieImageView用于显示progress
