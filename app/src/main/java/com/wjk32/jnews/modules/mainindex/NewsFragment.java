@@ -4,50 +4,29 @@ package com.wjk32.jnews.modules.mainindex;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.LoopRecyclerview.LoopRecyclerViewPager;
-import com.chad.library.adapter.base.LoopRecyclerview.RecyclerViewPager;
-import com.pnikosis.materialishprogress.ProgressWheel;
-import com.wjk32.jnews.constants.NewsC;
 import com.wjk32.jnews.R;
 import com.wjk32.jnews.entity.Artical;
-import com.wjk32.jnews.entity.News;
-import com.wjk32.jnews.modules.Constants;
 import com.wjk32.jnews.modules.mainindex.NewsDetail.NewsDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.observers.DisposableObserver;
-import io.reactivex.schedulers.Schedulers;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
-import static android.support.v4.util.Preconditions.checkNotNull;
-import static com.wjk32.jnews.constants.NewsC.APIKEY;
-import static com.wjk32.jnews.constants.NewsC.SOURCES;
 
 public class NewsFragment extends Fragment implements NewsContract.View{
 
@@ -59,9 +38,7 @@ public class NewsFragment extends Fragment implements NewsContract.View{
 
     @BindView(R.id.swipeContainer)
     SwipeRefreshLayout swipeContainer;
-
-    LoopRecyclerViewPager vpTop;
-
+    
     Boolean isAutoPlay;
     LinearLayoutManager linearLayoutManager;
     LinearLayoutManager mLayoutManager;
@@ -105,13 +82,12 @@ public class NewsFragment extends Fragment implements NewsContract.View{
 
 
         View view1 = LayoutInflater.from(getContext()).inflate(R.layout.tab_bar_01_newsheader, (ViewGroup) recyclerView.getParent(), false);
-        vpTop = (LoopRecyclerViewPager) view1.findViewById(R.id.vp_top);
+
 
 
         if(linearLayoutManager==null){
             linearLayoutManager=new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
         }
-        vpTop.setLayoutManager(linearLayoutManager);
 
 
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -134,14 +110,15 @@ public class NewsFragment extends Fragment implements NewsContract.View{
 
             }
         });
-        if(vpTop.getParent()!=null)
-            ((ViewGroup)vpTop.getParent()).removeView(vpTop); // <- fix
-        vpTop.setAdapter(new NewsHeaderAdapter(R.layout.tab_bar_01_newsheader_item,articalList));
-        quickNewsAdapter.addHeaderView(vpTop);
-        if(mLayoutManager==null)
+        
+        if(mLayoutManager==null){
+
             mLayoutManager = new LinearLayoutManager(getContext());
-        if(parcelable!=null&&!refresh)
+        }
+        if(parcelable!=null&&!refresh){
+
             mLayoutManager.onRestoreInstanceState(parcelable);
+        }
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(quickNewsAdapter);
@@ -162,28 +139,10 @@ public class NewsFragment extends Fragment implements NewsContract.View{
             }
         });
         swipeContainer.setRefreshing(false);
-        vpTop.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                int action = event.getAction();
-                switch (action) {
-                    case MotionEvent.ACTION_DOWN:
-                        isAutoPlay = false;
-                        mPresenter.changeNewsheader(isAutoPlay,vpTop.getActualCurrentPosition());
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        isAutoPlay = true;
-                        mPresenter.changeNewsheader(isAutoPlay,vpTop.getActualCurrentPosition());
-                        break;
-                }
-                return false;
-            }
-        });
     }
 
     @Override
-    public void showHeader(int position) {
-        vpTop.smoothScrollToPosition(position);
+    public void showHeader(int position) {;
     }
 
     @Override
@@ -195,7 +154,9 @@ public class NewsFragment extends Fragment implements NewsContract.View{
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        if(mLayoutManager!=null)    parcelable=mLayoutManager.onSaveInstanceState();
+        if(mLayoutManager!=null)    {
+            parcelable=mLayoutManager.onSaveInstanceState();
+        }
     }
 
     @Override

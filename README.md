@@ -85,3 +85,4 @@ Picasso的总体流程：
 代码流程如下：Picasso->load->创建request->创建action->Dispatcher分发action->RequestHandler的load方法处理具体的请求->PicassoDrawable显示图片。
 
 另外写了PieImageView用于显示progress
+

@@ -1,7 +1,7 @@
 package com.chad.library.adapter.base.LoopRecyclerview;
 
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.ViewHolderDelegate;
+import androidx.appcompat.widget.RecyclerView;
+import androidx.appcompat.widget.ViewHolderDelegate;
 
 
 public class LoopRecyclerViewPagerAdapter<VH extends RecyclerView.ViewHolder>

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <android.support.v4.widget.SwipeRefreshLayout
+    <androidx.core.widget.SwipeRefreshLayout
         android:id="@+id/swipeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,13 +13,13 @@
             android:id="@+id/rv_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </androidx.core.widget.SwipeRefreshLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.appcompat.widget.RecyclerView
         android:id="@+id/rv_list1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone">
 
-    </android.support.v7.widget.RecyclerView>
+    </androidx.appcompat.widget.RecyclerView>
 </FrameLayout>

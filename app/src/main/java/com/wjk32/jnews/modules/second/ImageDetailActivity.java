@@ -1,27 +1,21 @@
 package com.wjk32.jnews.modules.second;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
+import androidx.annotation.Nullable;
+
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 import com.wjk32.jnews.R;
 import com.wjk32.jnews.base.BaseActivity;
-import com.wjk32.jnews.entity.Artical;
 import com.wjk32.jnews.entity.ImageEntity;
 import com.wjk32.jnews.modules.Constants;
-import com.wjk32.jnews.modules.mainindex.NewsDetail.NewsDetailActivity;
+import com.wjk32.jnews.ui.customview.PieImageView;
 import com.wjk32.jnews.util.PicassoUtil;
-import com.wjk32.library.view.PieImageView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

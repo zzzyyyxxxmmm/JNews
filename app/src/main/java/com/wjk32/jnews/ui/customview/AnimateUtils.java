@@ -1,4 +1,4 @@
-package com.wjk32.library.view;
+package com.wjk32.jnews.ui.customview;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
@@ -9,15 +9,15 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
-import androidx.annotation.NonNull;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+
 /**
- * Created by leon on 4/18/15.
+ * Created by Jikang Wang on 4/11/19.
  */
 public class AnimateUtils {
-
     private static final int ANIM_DORITION = 400;
 
     public static void animateViewColor(final View view, int toColor) {
@@ -63,5 +63,4 @@ public class AnimateUtils {
         }
         return (int) (dp * scale);
     }
-
 }

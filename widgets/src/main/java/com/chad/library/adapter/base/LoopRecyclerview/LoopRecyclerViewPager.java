@@ -1,9 +1,8 @@
 package com.chad.library.adapter.base.LoopRecyclerview;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.AttributeSet;
-import android.util.Log;
 
 public class LoopRecyclerViewPager extends RecyclerViewPager {
 

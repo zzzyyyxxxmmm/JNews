@@ -1,4 +1,8 @@
-package com.wjk32.library.view;
+package com.wjk32.jnews.ui.customview;
+
+/**
+ * Created by Jikang Wang on 4/11/19.
+ */
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -6,13 +10,14 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import androidx.annotation.IntRange;
-
 import android.util.AttributeSet;
 import android.view.Display;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+
+import androidx.annotation.IntRange;
 
 @SuppressLint("AppCompatCustomView")
 public class PieImageView extends ImageView{

@@ -6,11 +6,11 @@ import java.util.Set;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.core.app.Fragment;
+import androidx.core.app.FragmentManager;
+import androidx.core.app.FragmentTransaction;
+import androidx.appcompat.widget.RecyclerView;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -20,8 +20,8 @@ import android.view.ViewGroup;
 import com.chad.library.R;
 
 /**
- * Implementation of {@link android.support.v4.view.PagerAdapter} that
- * uses a {@link android.support.v4.app.Fragment} to manage each page. This class also handles
+ * Implementation of {@link androidx.core.view.PagerAdapter} that
+ * uses a {@link androidx.core.app.Fragment} to manage each page. This class also handles
  * saving and restoring of fragment's state.
  * <p/>
  * <p>This version of the pager is more useful when there are a large number
@@ -29,7 +29,7 @@ import com.chad.library.R;
  * the user, their entire fragment may be destroyed, only keeping the saved
  * state of that fragment.  This allows the pager to hold on to much less
  * memory associated with each visited page as compared to
- * {@link android.support.v4.app.FragmentPagerAdapter} at the cost of potentially more overhead when
+ * {@link androidx.core.app.FragmentPagerAdapter} at the cost of potentially more overhead when
  * switching between pages.
  * <p/>
  * <p>When using FragmentPagerAdapter the host ViewPager must have a

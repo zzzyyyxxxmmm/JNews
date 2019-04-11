@@ -1,17 +1,17 @@
 package com.chad.library.adapter.base.LoopRecyclerview;
 
-import android.arch.lifecycle.BuildConfig;
+import androidx.lifecycle.BuildConfig;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.PointF;
 import android.os.Build;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
-import android.support.v4.text.TextUtilsCompat;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.LinearSmoothScroller;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.core.text.TextUtilsCompat;
+import androidx.core.view.ViewCompat;
+import androidx.appcompat.widget.LinearLayoutManager;
+import androidx.appcompat.widget.LinearSmoothScroller;
+import androidx.appcompat.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;

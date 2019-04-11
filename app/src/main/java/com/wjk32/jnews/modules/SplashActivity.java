@@ -2,7 +2,7 @@ package com.wjk32.jnews.modules;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.wjk32.jnews.base.BaseActivity;
 import com.wjk32.jnews.modules.mainindex.MainActivity;

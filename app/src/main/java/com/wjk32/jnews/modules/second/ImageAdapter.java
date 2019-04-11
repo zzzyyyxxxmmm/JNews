@@ -1,14 +1,13 @@
 package com.wjk32.jnews.modules.second;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.squareup.picasso.Picasso;
 import com.wjk32.jnews.R;
-import com.wjk32.jnews.entity.Artical;
 import com.wjk32.jnews.entity.ImageEntity;
 
 import java.util.List;
